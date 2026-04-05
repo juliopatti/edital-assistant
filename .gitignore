@@ -1,0 +1,17 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+storage/*.db
+# data/editais/*.pdf
+.venv/
+venv/
+.streamlit/
+*.egg-info/
+dist/
+build/
+.DS_Store
+storage/chromadb/
+storage/*.db
+
+how_env.txt
