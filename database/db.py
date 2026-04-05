@@ -39,6 +39,9 @@ def init_db():
 
             -- JSON completo do EditalInfo (validado por Pydantic)
             dados_json TEXT NOT NULL,
+                       
+            -- Resumo focado em Ciência de Dados
+            resumo_ciencia_dados TEXT,
 
             -- Texto completo do PDF (para contexto nas tools)
             texto_completo TEXT

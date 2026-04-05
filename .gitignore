@@ -15,3 +15,4 @@ storage/chromadb/
 storage/*.db
 
 how_env.txt
+test_langextract.py

@@ -23,6 +23,10 @@ Editar .env com suas chaves de API (OpenAI e/ou Google).
 
     streamlit run app.py --logger.level error 2>/dev/null
 
+5. (Opcional) Configurar LangSmith para rastreamento do agente:
+   Adicionar no .env as variáveis LANGCHAIN_TRACING_V2, LANGCHAIN_API_KEY e LANGCHAIN_PROJECT.
+   Criar conta gratuita em https://smith.langchain.com
+
 ## Ingerindo editais
 
 Via terminal:
