@@ -49,14 +49,14 @@ Retorne APENAS JSON, sem markdown, sem explicação.
       "registro_profissional": null,
       "vagas_imediatas": {"ampla_concorrencia": 0, "pessoa_com_deficiencia": 0, "candidato_negro": 0, "total": 0},
       "cadastro_reserva": {"ampla_concorrencia": 0, "pessoa_com_deficiencia": 0, "candidato_negro": 0, "total": 0},
-      "conteudo_programatico": ["LISTE TODOS OS BLOCOS/SEÇÕES do conteúdo programático específico, sem exceção"]
+      "conteudo_programatico": ["APENAS O NOME de cada bloco/seção, ex: 'Matemática', 'Probabilidade e Estatística'. NÃO inclua subtópicos."]
     }
   ]
 }
 
 REGRAS CRÍTICAS:
 1. O campo requisito_basico deve conter o texto LITERAL do edital, copiado palavra por palavra.
-2. O campo conteudo_programatico deve listar TODOS os blocos/seções do conteúdo específico da ênfase. Não resuma. Não omita nenhum.
+2. O campo conteudo_programatico deve listar o NOME de TODOS os blocos/seções do conteúdo específico (ex: "I - Matemática", "II - Probabilidade e Estatística"). Liste APENAS os nomes, sem subtópicos. Não omita nenhum bloco.
 3. Se o edital não tiver ênfase de Ciência de Dados, use a ênfase mais próxima e informe no campo enfase.
 4. Extraia apenas UMA ênfase (Ciência de Dados). O array enfases deve ter exatamente 1 item."""
 
