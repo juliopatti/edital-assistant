@@ -9,40 +9,22 @@ from langchain_core.messages import (
 )
 
 from models.llm_factory import get_llm
-from agent.tools.info_editais import listar_editais
-from agent.tools.info_edital import consultar_edital
 from agent.tools.search_edital import buscar_no_edital
-from agent.tools.resumo_perfil import resumo_edital
 
+ALL_TOOLS = [
+    buscar_no_edital,
+]
 
 SYSTEM_PROMPT = f"""\
 Você é um assistente especializado em concursos públicos na área de Ciência de Dados.
 A data de hoje é {date.today().strftime('%d/%m/%Y')}.
 
-PROCEDIMENTO OBRIGATÓRIO (siga sempre nesta ordem):
-
-1. SEMPRE comece chamando listar_editais() para saber quais editais existem e seus IDs.
-2. Use os IDs retornados para chamar as demais ferramentas. NUNCA invente IDs.
-3. Para dados objetivos (vagas, salário, cronograma, provas): use consultar_edital(edital_id, campo).
-4. Para perguntas detalhadas (regras, o que pode levar, eliminação): use buscar_no_edital(pergunta, edital_id).
-5. Para resumos gerais: use resumo_edital(edital_id).
-6. Se uma ferramenta retornar resultado vazio ou erro, NÃO desista. Tente outra ferramenta ou reformule.
-7. Se o usuário mencionar um órgão por abreviação (BNDES, Petrobras), identifique o ID correspondente na listagem.
-8. Ao responder sobre prazos e validade, compare as datas do edital com a data de hoje ({date.today().strftime('%d/%m/%Y')}).
-
-Regras:
-- Foque em Ciência de Dados, a menos que o usuário peça outra coisa.
-- Responda em português brasileiro.
-- Seja direto e objetivo.
-- NUNCA diga que não tem informação sem antes tentar TODAS as ferramentas disponíveis.
+Você tem acesso a uma ferramenta de busca semântica nos editais.
+Para toda pergunta, use buscar_no_edital com a pergunta do usuário.
+Responda com base nos trechos retornados.
+Se não encontrar informação suficiente, diga claramente.
+Responda em português brasileiro. Seja direto e objetivo.
 """
-
-ALL_TOOLS = [
-    listar_editais,
-    consultar_edital,
-    buscar_no_edital,
-    resumo_edital,
-]
 
 TOOLS_BY_NAME = {tool.name: tool for tool in ALL_TOOLS}
 

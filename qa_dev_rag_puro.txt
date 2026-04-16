@@ -1,0 +1,29 @@
+"Qual o salário do concurso do BNDES?"
+R$ 20.900,00
+
+"Quantas vagas PcD tem no BNDES pra Ciência de Dados?"
+3 vagas imediatas PcD, 15 cadastro reserva PcD
+
+"Qual o requisito pra Ciência de Dados no BNDES?"
+Qualquer graduação de nível superior. Não exige curso específico nem registro profissional.
+
+"A prova de inglês do BNDES elimina?"
+Não. Caráter apenas classificatório.
+
+"Quantos blocos tem o conteúdo programático de Ciência de Dados no BNDES?"
+13 blocos (I a XIII).
+
+"Qual a nota mínima em Conhecimentos Transversais no BNDES?"
+10 pontos (de 20 possíveis).
+
+"Posso levar relógio na prova do BNDES?"
+Não. É vedado o porte de relógios de qualquer natureza (item 9.20).
+
+"As inscrições do BNDES estão abertas?"
+Não. Foram de 26/07 a 19/08/2024. Já encerraram.
+
+"Qual a jornada de trabalho no BNDES?"
+35 horas semanais.
+
+"Quais são os critérios de desempate do BNDES?"
+Em ordem: idade ≥60 anos, maior nota na discursiva, maior nota em Conhecimentos Específicos, maior nota em Conhecimentos Transversais, maior nota em Língua Portuguesa, exercício de função de jurado, maior idade.
