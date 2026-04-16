@@ -18,3 +18,4 @@ how_env.txt
 test_langextract.py
 storage_backup/
 storage_backup_pre_h2/
+dev_qas
