@@ -1,33 +1,52 @@
-"""
-Tool dummy — será substituída por tools reais no Passo 1.
-Serve para validar que o fluxo agente → tool → resposta funciona.
-"""
+"""Lista editais cadastrados com IDs."""
 
 from langchain_core.tools import tool
-from database.db import listar_editais
+from database.db import get_connection
 
 
 @tool
-def info_editais_cadastrados() -> str:
-    """Retorna informações sobre os editais cadastrados no sistema.
-    Use quando o usuário perguntar quais editais estão disponíveis,
-    ou quando precisar saber o que já foi cadastrado."""
+def listar_editais() -> str:
+    """Lista todos os editais cadastrados no sistema.
+    SEMPRE chame esta ferramenta PRIMEIRO antes de qualquer outra consulta.
+    Use os IDs retornados para chamar as demais ferramentas.
+    Para detalhes de um edital específico, use consultar_edital(edital_id, campo)."""
 
-    editais = listar_editais()
+    conn = get_connection()
+    rows = conn.execute("""
+        SELECT e.id, e.orgao, e.numero_edital, e.cargo,
+               en.enfase, en.vagas_imediatas_total
+        FROM editais e
+        LEFT JOIN enfases en ON e.id = en.edital_id
+        ORDER BY e.id
+    """).fetchall()
+    conn.close()
 
-    if not editais:
-        return (
-            "Nenhum edital cadastrado ainda. "
-            "O sistema precisa que editais sejam ingeridos primeiro."
-        )
+    if not rows:
+        return "Nenhum edital cadastrado no sistema."
+
+    editais = {}
+    for row in rows:
+        eid = row["id"]
+        if eid not in editais:
+            editais[eid] = {
+                "id": eid,
+                "orgao": row["orgao"],
+                "numero_edital": row["numero_edital"],
+                "cargo": row["cargo"],
+                "vagas": 0,
+                "enfase": "",
+            }
+        if row["enfase"]:
+            editais[eid]["enfase"] = row["enfase"]
+            editais[eid]["vagas"] = row["vagas_imediatas_total"] or 0
 
     linhas = []
-    for e in editais:
+    for e in editais.values():
         linhas.append(
-            f"- {e.orgao} ({e.numero_edital}): {e.cargo}, "
-            f"salário {e.salario_inicial}, "
-            f"{e.total_vagas_foco} vagas em Ciência de Dados, "
-            f"status: {e.status}"
+            f"ID={e['id']} | {e['orgao']} | {e['numero_edital']} | "
+            f"{e['cargo']} | {e['enfase']}: {e['vagas']} vagas"
         )
 
-    return f"Editais cadastrados ({len(editais)}):\n" + "\n".join(linhas)
+    resultado = f"Editais cadastrados ({len(editais)}):\n" + "\n".join(linhas)
+    resultado += "\n\nUse consultar_edital(edital_id, campo) para detalhes como cronograma, provas, vagas, requisitos, salário, benefícios, conteúdo programático."
+    return resultado

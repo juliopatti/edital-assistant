@@ -5,33 +5,32 @@ from database.db import get_connection
 
 
 @tool
-def resumo_por_perfil(orgao: str = "") -> str:
-    """Retorna um resumo completo do edital sob o ponto de vista de Ciência de Dados.
-    Use quando o usuário pedir algo como 'resuma o concurso' ou
-    'o que preciso saber sobre esse concurso'.
+def resumo_edital(edital_id: int) -> str:
+    """Retorna o resumo completo do edital focado em Ciência de Dados.
+    Use quando o usuário pedir 'resuma o concurso' ou 'o que preciso saber'.
 
     Args:
-        orgao: filtro por órgão (ex: 'BNDES'). Vazio retorna todos.
+        edital_id: ID numérico do edital (obtido via listar_editais).
     """
 
     conn = get_connection()
-    if orgao:
-        rows = conn.execute(
-            "SELECT orgao, numero_edital, resumo_ciencia_dados FROM editais WHERE LOWER(orgao) LIKE ?",
-            (f"%{orgao.lower()}%",)
-        ).fetchall()
-    else:
-        rows = conn.execute(
-            "SELECT orgao, numero_edital, resumo_ciencia_dados FROM editais"
-        ).fetchall()
+    row = conn.execute(
+        "SELECT orgao, numero_edital, resumo_ciencia_dados FROM editais WHERE id = ?",
+        (edital_id,)
+    ).fetchone()
     conn.close()
 
-    if not rows:
-        return "Nenhum edital encontrado."
+    if not row:
+        return (
+            f"Edital com ID={edital_id} não encontrado. "
+            "Use listar_editais() para ver os IDs disponíveis."
+        )
 
-    resultado = ""
-    for row in rows:
-        resumo = row["resumo_ciencia_dados"] or "Resumo não disponível. Reingira o edital."
-        resultado += f"=== {row['orgao']} — {row['numero_edital']} ===\n{resumo}\n\n"
+    resumo = row["resumo_ciencia_dados"]
+    if not resumo:
+        return (
+            f"Resumo do edital {row['orgao']} ({row['numero_edital']}) ainda não foi gerado. "
+            "Reingira o edital para gerar o resumo."
+        )
 
-    return resultado
+    return f"=== {row['orgao']} — {row['numero_edital']} ===\n{resumo}"
