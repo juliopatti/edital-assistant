@@ -19,3 +19,8 @@ test_langextract.py
 storage_backup/
 storage_backup_pre_h2/
 dev_qas
+storage_backup_pre_docling/
+
+
+smoke_docling_test.ipynb
+out_test_docling/
