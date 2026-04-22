@@ -1,15 +1,29 @@
-"""RAG v1: chunking fixo + BGE-M3 + ChromaDB."""
+"""
+RAG v2: chunks estruturais (markdown com metadados) + BGE-M3 + ChromaDB.
+
+Diferente da v1 (chunking fixo de 1000 chars sobre o texto bruto do pdfplumber),
+aqui os chunks vêm do md_pipeline.md_chunker — split por headers com breadcrumb
+prependado e metadados ricos (h1..h4, numero_secao, tipo, páginas, etc.).
+
+API:
+    - indexar_chunks(edital_id, chunks):     substitui chunks antigos desse edital
+    - buscar_chunks(query, n_results, ...):  retrieval com filtros opcionais
+    - get_chroma_collection():               acesso direto à coleção (usado no admin)
+"""
 
 import chromadb
 from sentence_transformers import SentenceTransformer
-from pathlib import Path
+
 from config import settings
+
 
 # Paths
 CHROMA_DIR = str(settings.base_dir / "storage" / "chromadb")
 
+
 # Modelo carrega uma vez
 _model = None
+
 
 def get_model():
     global _model
@@ -27,58 +41,89 @@ def get_chroma_collection():
     )
 
 
-def chunk_texto(texto: str, chunk_size: int = 1000, overlap: int = 200) -> list[str]:
-    """Divide texto em chunks com overlap."""
-    chunks = []
-    inicio = 0
-    while inicio < len(texto):
-        fim = inicio + chunk_size
-        chunk = texto[inicio:fim]
-        if chunk.strip():
-            chunks.append(chunk.strip())
-        inicio += chunk_size - overlap
-    return chunks
+def indexar_chunks(edital_id: int, chunks: list[dict]) -> None:
+    """
+    Indexa chunks já prontos no ChromaDB, substituindo quaisquer chunks
+    anteriores do mesmo edital_id.
 
+    `chunks` deve ser o retorno de md_pipeline.md_chunker.chunk_edital:
+        [{"texto": str, "metadata": dict}, ...]
+    """
+    if not chunks:
+        print("  Nenhum chunk a indexar.")
+        return
 
-def indexar_edital(edital_id: int, orgao: str, texto: str):
-    """Chunka o texto, gera embeddings e salva no ChromaDB."""
     model = get_model()
     collection = get_chroma_collection()
 
-    # Remove chunks antigos desse edital
+    # Remove chunks antigos desse edital (reindex idempotente)
     try:
         existing = collection.get(where={"edital_id": edital_id})
         if existing["ids"]:
             collection.delete(ids=existing["ids"])
-    except Exception:
-        pass
+            print(f"  Removidos {len(existing['ids'])} chunks antigos do edital {edital_id}.")
+    except Exception as e:
+        print(f"  Aviso ao limpar chunks antigos: {e}")
 
-    chunks = chunk_texto(texto)
-    print(f"  {len(chunks)} chunks gerados.")
+    ids = [
+        f"edital_{edital_id}_cap_{c['metadata']['cap_num']}_chunk_{c['metadata']['chunk_index']}"
+        for c in chunks
+    ]
+    textos = [c["texto"] for c in chunks]
+    metadatas = [c["metadata"] for c in chunks]
 
-    ids = [f"edital_{edital_id}_chunk_{i}" for i in range(len(chunks))]
-    metadatas = [{"edital_id": edital_id, "orgao": orgao, "chunk_index": i} for i in range(len(chunks))]
-
-    print("  Gerando embeddings (pode demorar em CPU)...")
-    embeddings = model.encode(chunks, show_progress_bar=True, batch_size=16)
+    print(f"  Gerando embeddings de {len(textos)} chunks (pode demorar em CPU)...")
+    embeddings = model.encode(textos, show_progress_bar=True, batch_size=16)
 
     collection.add(
         ids=ids,
-        documents=chunks,
+        documents=textos,
         embeddings=embeddings.tolist(),
         metadatas=metadatas,
     )
-    print(f"  {len(chunks)} chunks indexados no ChromaDB.")
+    print(f"  {len(textos)} chunks indexados no ChromaDB.")
 
 
-def buscar_chunks(query: str, n_results: int = 10, orgao: str = None) -> list[dict]:
-    """Busca chunks relevantes pra uma query."""
+def buscar_chunks(
+    query: str,
+    n_results: int = 10,
+    orgao: str | None = None,
+    edital_id: int | None = None,
+    tipo: str | None = None,
+) -> list[dict]:
+    """
+    Busca chunks relevantes para a query. Filtros opcionais combinados com AND.
+
+    Args:
+        query:      texto livre da pergunta
+        n_results:  top-k
+        orgao:      filtrar por órgão (ex: "BNDES")
+        edital_id:  filtrar por ID do edital
+        tipo:       "preambulo" | "corpo" | "anexo" | "apendice"
+
+    Retorna list[dict] com chaves: texto, metadata, distancia.
+    """
     model = get_model()
     collection = get_chroma_collection()
 
     query_embedding = model.encode([query])[0].tolist()
 
-    where = {"orgao": orgao} if orgao else None
+    # Monta filtro where (Chroma exige $and explícito quando há múltiplos)
+    filtros: list[dict] = []
+    if edital_id is not None:
+        filtros.append({"edital_id": edital_id})
+    if orgao is not None:
+        filtros.append({"orgao": orgao})
+    if tipo is not None:
+        filtros.append({"tipo": tipo})
+
+    where: dict | None
+    if len(filtros) == 0:
+        where = None
+    elif len(filtros) == 1:
+        where = filtros[0]
+    else:
+        where = {"$and": filtros}
 
     results = collection.query(
         query_embeddings=[query_embedding],
@@ -89,9 +134,8 @@ def buscar_chunks(query: str, n_results: int = 10, orgao: str = None) -> list[di
     chunks = []
     for i in range(len(results["ids"][0])):
         chunks.append({
-            "texto": results["documents"][0][i],
-            "metadata": results["metadatas"][0][i],
+            "texto":     results["documents"][0][i],
+            "metadata":  results["metadatas"][0][i],
             "distancia": results["distances"][0][i] if results["distances"] else None,
         })
-
     return chunks

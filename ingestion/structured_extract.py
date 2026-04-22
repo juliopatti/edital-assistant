@@ -26,7 +26,7 @@ Extraia as informações deste edital. FOCO: apenas a ênfase de Ciência de Dad
 Retorne APENAS JSON, sem markdown, sem explicação.
 
 {
-  "orgao": "",
+  "orgao": "SIGLA CURTA do órgão (ex: 'CVM', 'BNDES', 'Petrobras'). NÃO use o nome por extenso.",
   "numero_edital": "",
   "data_publicacao": "",
   "banca": "",
