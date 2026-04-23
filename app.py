@@ -12,6 +12,7 @@ load_dotenv()
 
 from agent.agent import build_agent, ask
 from config import settings
+from database.db import listar_editais
 
 import warnings
 import os
@@ -49,6 +50,31 @@ with st.sidebar:
         options=model_options.get(provider, []),
     )
 
+    st.divider()
+    st.markdown("**Edital ativo**")
+
+    editais = listar_editais()
+
+    if not editais:
+        st.info("Nenhum edital ingerido ainda. Vá na página Admin para ingerir.")
+        st.stop()
+
+    opcoes = {f"{e.orgao} — {e.numero_edital}": e.id for e in editais}
+    opcoes["Todos os editais"] = 0
+
+    label_escolhido = st.selectbox(
+        "Selecione o edital desta conversa",
+        options=list(opcoes.keys()),
+        key="edital_label",
+    )
+    edital_id_ativo = opcoes[label_escolhido]
+
+    # Se o edital mudou, reseta conversa e agente
+    if st.session_state.get("edital_id_anterior") != edital_id_ativo:
+        st.session_state.messages = []
+        st.session_state.pop("agent", None)
+        st.session_state.edital_id_anterior = edital_id_ativo
+
     if st.button("🔄 Reiniciar conversa"):
         st.session_state.messages = []
         st.session_state.pop("agent", None)
@@ -56,13 +82,9 @@ with st.sidebar:
 
     st.divider()
     st.markdown("**Status do sistema**")
-    from database.db import listar_editais
-    editais = listar_editais()
     st.write(f"Editais cadastrados: {len(editais)}")
     for e in editais:
         st.write(f"· {e.orgao} — {e.numero_edital}")
-    if not editais:
-        st.info("Nenhum edital ingerido ainda.")
 
 
 # --- Agent init ---
@@ -88,12 +110,10 @@ for msg in st.session_state.messages:
 
 # Input do usuário
 if prompt := st.chat_input("Pergunte sobre editais de concursos..."):
-    # Mostra mensagem do usuário
     st.session_state.messages.append(HumanMessage(content=prompt))
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Resposta do agente
     with st.chat_message("assistant"):
         with st.spinner("Pensando..."):
             agent = get_agent()
@@ -102,6 +122,7 @@ if prompt := st.chat_input("Pergunte sobre editais de concursos..."):
                     agent=agent,
                     question=prompt,
                     chat_history=st.session_state.messages[:-1],
+                    edital_id_ativo=edital_id_ativo,
                 )
             except Exception as e:
                 response = f"Erro ao processar: {str(e)}"

@@ -15,8 +15,12 @@ Valores válidos para provider/modelo estão definidos em prompts.MODELOS.
 """
 
 # (provider, modelo)
-VAR_TOC = ("google", "flash-lite")
-VAR_MD  = ("google", "flash-lite")
+# VAR_TOC = ("google", "flash-lite")
+# VAR_MD  = ("google", "flash-lite")
+
+# Cenário ideal (qualidade máxima):
+VAR_TOC = ("anthropic", "sonnet")   # claude-sonnet-4-5
+VAR_MD  = ("anthropic", "haiku")    # claude-haiku-4-5
 
 # Desempacotados como constantes individuais (usadas pelo pipeline)
 PROVIDER_TOC, MODELO_TOC = VAR_TOC

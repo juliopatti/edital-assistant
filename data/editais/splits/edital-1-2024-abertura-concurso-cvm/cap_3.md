@@ -29,7 +29,7 @@ g) Possuir os requisitos exigidos para o exercício das atribuições legais do 
 
 h) Não estar em débito com o erário;
 
-i) Não ter sofrido, no exercício da função pública, as penalidades previstas nos arts 117, incs. IX e XI, da Lei 8.112/90, que incompatibilizem o ex servidor para nova investidura em cargo público federal pelo prazo de 5 (cinco) anos;
+i) Não ter sofrido, no exercício da função pública, as penalidades previstas nos arts 117, incs. IX e XI, da Lei 8.112/90, que incompatibilizam o ex servidor para nova investidura em cargo público federal pelo prazo de 5 (cinco) anos;
 
 j) Não receber proventos de aposentadoria que caracterizem acumulação ilícita de cargos, na forma do inciso XVI combinado com o parágrafo 10 do art. 37 da Constituição Federal;
 

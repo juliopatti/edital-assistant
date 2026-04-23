@@ -1,10 +1,8 @@
 # 2. DO CONCURSO
 
 ## 2.1. O concurso será realizado em 2 (duas) fases, conforme descrito a seguir:
-
-a) Prova Objetiva, de caráter eliminatório e classificatório; e
-
-b) Prova Discursiva, de caráter eliminatório e classificatório.
+a) Prova Objetiva, de caráter eliminatório e classificatório; e 
+b) Prova Discursiva, de caráter eliminatório e classificatório. 
 
 ## 2.2. As fases mencionadas no subitem 2.1 serão executadas pela FGV e realizadas em todas as capitais do país.
 

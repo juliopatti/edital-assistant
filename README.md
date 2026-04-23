@@ -6,7 +6,8 @@ Ferramenta que responde perguntas sobre editais de concursos públicos com foco 
 
 1. Criar e ativar ambiente virtual:
 
-    python -m venv venv
+    python3.11 -m venv venv  
+    
     source venv/bin/activate
 
 2. Instalar dependências:

@@ -1,6 +1,6 @@
 # ANEXO I – CONTEÚDO PROGRAMÁTICO
 
-O conteúdo programático contempla legislação, jurisprudência e doutrina pertinentes aos temas. As alterações legislativas ocorridas após a publicação do edital poderão ser exigidas nas provas.
+- O conteúdo programático contempla legislação, jurisprudência e doutrina pertinentes aos temas. As alterações legislativas ocorridas após a publicação do edital poderão ser exigidas nas provas.
 
 ## CONHECIMENTOS BÁSICOS (COMUM A TODAS AS ESPECIALIDAES)
 

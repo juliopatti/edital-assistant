@@ -58,7 +58,7 @@ O(A) candidato(a) poderá se inscrever para mais de uma ênfase, observados o di
 
 ### 5.4.1.2.1
 
-Ao se inscrever para mais de uma ênfase, o(a) candidato(a) deverá estar ciente de que, no dia/turno de realização das provas, deverá optar pela ênfase para a qual realizará as provas, não podendo, em hipótese alguma, **realizar provas para mais de uma ênfase**.
+Ao se inscrever para mais de uma ênfase, o(a) candidato(a) deverá estar ciente de que, no dia/turno de realização das provas, deverá optar pela ênfase para a qual realizará as provas, não podendo, em hipótese alguma, realizar provas para mais de uma ênfase.
 
 ### 5.4.1.2.1.1
 
@@ -70,7 +70,7 @@ Encerrado o período de inscrição, as inscrições realizadas no sistema de in
 
 ### 5.4.1.3
 
-No momento da inscrição, o(a) candidato(a) deverá **assinalar a concordância com os termos que constam neste edital, bem como declarar que aceita que os seus dados pessoais, sensíveis ou não, sejam tratados e processados de forma a possibilitar a efetiva execução do processo seletivo público, com a aplicação dos critérios de avaliação e seleção, autorizando expressamente a divulgação de seus nomes, números de inscrição e notas, em observância aos princípios da publicidade e da transparência que regem a Administração Pública e nos termos da Lei n.º 13.709, de 14 de agosto de 2018**.
+No momento da inscrição, o(a) candidato(a) deverá assinalar a concordância com os termos que constam neste edital, bem como declarar que aceita que os seus dados pessoais, sensíveis ou não, sejam tratados e processados de forma a possibilitar a efetiva execução do processo seletivo público, com a aplicação dos critérios de avaliação e seleção, autorizando expressamente a divulgação de seus nomes, números de inscrição e notas, em observância aos princípios da publicidade e da transparência que regem a Administração Pública e nos termos da Lei n.º 13.709, de 14 de agosto de 2018.
 
 ### 5.4.2
 
@@ -198,7 +198,7 @@ No período de interposição de recurso, não haverá possibilidade de envio de
 
 ### 5.4.8.11.7
 
-O(A) candidato(a) deverá verificar se a sua solicitação de isenção de taxa foi deferida, **após a análise dos recursos**, a partir da **data provável estabelecida no cronograma constante do Anexo IV deste edital**, no endereço eletrônico http://www.cebraspe.org.br/concursos/petrobras_21_ns.
+O(A) candidato(a) deverá verificar se a sua solicitação de isenção de taxa foi deferida, após a análise dos recursos, a partir da **data provável estabelecida no cronograma constante do Anexo IV deste edital**, no endereço eletrônico http://www.cebraspe.org.br/concursos/petrobras_21_ns.
 
 ### 5.4.8.12
 
@@ -348,4 +348,4 @@ No período de interposição de recurso, não haverá possibilidade de envio de
 
 ### 5.4.9.11.8
 
-O(A) candidato(a) deverá verificar se a sua solicitação de atendimento especial foi deferida, **após análise dos recursos**, a partir da **data provável estabelecida no cronograma constante do Anexo IV deste edital**, no endereço eletrônico http://www.cebraspe.org.br/concursos/petrobras_21_ns.
+O(A) candidato(a) deverá verificar se a sua solicitação de atendimento especial foi deferida, após análise dos recursos, a partir da **data provável estabelecida no cronograma constante do Anexo IV deste edital**, no endereço eletrônico http://www.cebraspe.org.br/concursos/petrobras_21_ns.

@@ -12,8 +12,8 @@
 
 **Benefícios e demais vantagens:** Os(As) candidatos(as) admitidos(as), além dos benefícios legais, farão jus à percepção das seguintes vantagens, na forma dos normativos vigentes: (a) Possibilidade de ascensão de carreira de acordo com o plano de cargos e salários vigente à época da admissão e conforme desempenho do empregado; (b) Benefício de assistência à saúde; (c) Assistência Educacional (auxílio babá, creche e ensinos fundamental e médio); (d) Plano de previdência complementar, bem como demais vantagens estabelecidas por normas complementares específicas vigentes à época da contratação.
 
-### 2.1.8 - Ênfase: Ciência de Dados
+## 2.1.8 - Ênfase: Ciência de Dados
 
-#### 2.1.8.1 - Requisito Básico
+### 2.1.8.1 - Requisito Básico
 
 Certificado de conclusão ou diploma, devidamente registrado, de curso de graduação de nível superior, expedido por Instituição de Ensino reconhecida pelo Ministério da Educação.

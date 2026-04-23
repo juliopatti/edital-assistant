@@ -22,7 +22,7 @@ d) Conhecimentos Específicos - 35 (trinta e cinco) questões valendo 1,0 (um) p
 
 ### 8.1.3
 
-Após a 1ª Etapa, os candidatos serão classificados por ênfase a partir do total de pontos obtidos, sendo **eliminado(a) o(a) candidato(a) que obtiver aproveitamento inferior a 60% (sessenta por cento)** do total da pontuação do conjunto das provas objetivas eliminatórias. Será, ainda, **eliminado(a) o(a) candidato(a) que não obtiver o mínimo de 10 (dez) pontos** na prova de Conhecimentos Transversais, de **5 (cinco) pontos** na prova de Língua Portuguesa e de **18 (dezoito) pontos** na prova de Conhecimentos Específicos.
+Após a 1ª Etapa, os candidatos serão classificados por ênfase a partir do total de pontos obtidos, sendo **eliminado(a)** o(a) candidato(a) que obtiver aproveitamento inferior a **60% (sessenta por cento)** do total da pontuação do conjunto das provas objetivas eliminatórias. Será, ainda, **eliminado(a)** o(a) candidato(a) que não obtiver o mínimo de **10 (dez) pontos** na prova de Conhecimentos Transversais, de **5 (cinco) pontos** na prova de Língua Portuguesa e de **18 (dezoito) pontos** na prova de Conhecimentos Específicos.
 
 ### 8.1.4
 
@@ -36,7 +36,7 @@ Essa fase será composta de 5 (cinco) questões: 4 (quatro) questões de Conheci
 
 Será eliminado o(a) candidato(a) que:
 
-a) obtiver aproveitamento inferior a 60% (sessenta por cento) do total da pontuação da prova discursiva;
+a) obtiver aproveitamento inferior a **60% (sessenta por cento)** do total da pontuação da prova discursiva;
 
 b) elaborar uma resposta que for assinada e/ou apresentar qualquer sinal que, de alguma forma, possibilite a sua identificação.
 
@@ -62,9 +62,9 @@ Com relação às questões de Conhecimentos Específicos, será aferida a capac
 
 Com relação à questão de Conhecimentos Transversais (comum a todas as ênfases), a avaliação considerará:
 
-a) quanto ao conteúdo de Conhecimentos Transversais, atribuindo-se 60% (sessenta por cento) do valor total da questão, a capacidade de lidar com os conceitos, as técnicas e as atividades próprias do conteúdo abordado, aferindo a compreensão, o conhecimento, o desenvolvimento e a adequação desses conceitos, a conexão e a pertinência ao assunto e o atendimento aos tópicos solicitados;
+a) quanto ao conteúdo de Conhecimentos Transversais, atribuindo-se **60% (sessenta por cento)** do valor total da questão, a capacidade de lidar com os conceitos, as técnicas e as atividades próprias do conteúdo abordado, aferindo a compreensão, o conhecimento, o desenvolvimento e a adequação desses conceitos, a conexão e a pertinência ao assunto e o atendimento aos tópicos solicitados;
 
-b) quanto ao uso do idioma, atribuindo-se 40% (quarenta por cento) do valor total da questão, a proficiência na instrumentalização de conhecimentos ortográficos, gramaticais adequados à norma-padrão e textuais, observando-se coerência e coesão.
+b) quanto ao uso do idioma, atribuindo-se **40% (quarenta por cento)** do valor total da questão, a proficiência na instrumentalização de conhecimentos ortográficos, gramaticais adequados à norma-padrão e textuais, observando-se coerência e coesão.
 
 #### 8.1.5.3
 

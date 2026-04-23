@@ -122,6 +122,9 @@ g) não apresentar o documento de identidade original, na forma definida no subi
 #### 3.1.12.8
 As vagas definidas no subitem 3.1.1 deste edital que não forem providas por falta de candidatos com deficiência aprovados serão preenchidas pelos demais candidatos, observada a ordem geral de classificação por ênfase.
 
+#### 3.1.12.9
+O parecer favorável da equipe multiprofissional habilita o(a) candidato(a) tão somente a concorrer às vagas reservadas às pessoas com deficiência nos termos da legislação e conforme sua classificação e não exime da obrigação, de caso convocado, se submeter a avaliação de saúde admissional conforme previsto no item 14 deste edital.
+
 ## 3.2 Das vagas destinadas aos(as) candidatos(as) negros(as)
 
 ### 3.2.1

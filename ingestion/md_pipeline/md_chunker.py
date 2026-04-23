@@ -29,6 +29,13 @@ Regras:
 3. Chunks grandes subdividem por ###, depois por parágrafo. Sub-chunks herdam
    h1..h4 do pai.
 4. Cap_0 (preâmbulo): texto corrido, split por parágrafos até CHUNK_ALVO.
+
+Observação sobre formatos de edital:
+    Alguns LLMs extraem itens numerados colocando a regra INTEIRA dentro do
+    próprio header (ex: '### 9.6.6. O candidato deverá...'), deixando o bloco
+    sem conteúdo abaixo. A função _mover_header_longo_para_conteudo cuida
+    desse caso preservando o texto, para que nada seja descartado pelo filtro
+    de blocos vazios.
 """
 
 import re
@@ -49,6 +56,10 @@ _HEADER_RE = re.compile(r"^(#{1,6})\s+(.*)$")
 
 # Numeração hierárquica tipo "9.6.1" no começo do header
 _NUMERO_SECAO_RE = re.compile(r"^(\d+(?:\.\d+)+)\b")
+
+# Casa header da forma "9.6.6. Texto longo da regra..." — numeração
+# hierárquica (>=2 níveis) seguida de texto substantivo
+_HEADER_COM_REGRA_RE = re.compile(r"^(\d+(?:\.\d+)+\.?)\s+(.+)$")
 
 
 def _tipo_capitulo(cap_num: int, cap_titulo: str) -> str:
@@ -166,6 +177,55 @@ def _descartar_headers_orfaos(blocos: list[dict]) -> list[dict]:
             if i + 1 < len(blocos) and blocos[i + 1]["nivel"] > 1:
                 continue
         out.append(b)
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Recuperar texto que ficou preso dentro do header (ex: "### 9.6.6. O
+# candidato deverá...") — sem isso, o filtro de blocos vazios jogaria fora
+# ---------------------------------------------------------------------------
+
+def _mover_header_longo_para_conteudo(blocos: list[dict]) -> list[dict]:
+    """
+    Alguns LLMs produzem markdown com a regra inteira dentro do header:
+        ### 9.6.6. O candidato deverá assinalar a resposta...
+    O parser lê isso como header='9.6.6. O candidato...' e conteudo=''.
+    Sem intervenção, o filtro seguinte descarta esse bloco como 'vazio'.
+
+    Esta função olha todo bloco de conteúdo vazio e, se o header carrega uma
+    numeração hierárquica seguida de texto substantivo, move o texto do header
+    para o conteúdo (mantendo só a numeração como header). Assim nenhum texto
+    do markdown é descartado.
+    """
+    out = []
+    for b in blocos:
+        header = (b.get("header") or "").strip()
+        conteudo = (b.get("conteudo") or "").strip()
+
+        if conteudo:
+            out.append(b)
+            continue
+
+        m = _HEADER_COM_REGRA_RE.match(header)
+        if not m:
+            out.append(b)
+            continue
+
+        numero = m.group(1).rstrip(".")
+        texto  = m.group(2).strip()
+        if len(texto) < 20:  # texto curto: não é regra, é rótulo. Mantém.
+            out.append(b)
+            continue
+
+        novo = dict(b)
+        novo["header"]   = numero
+        novo["conteudo"] = texto
+
+        nivel_key = f"h{b['nivel']}"
+        if nivel_key in novo:
+            novo[nivel_key] = numero
+
+        out.append(novo)
     return out
 
 
@@ -325,7 +385,8 @@ def chunk_capitulo(
     else:
         blocos = _parse_blocos(md_text)
         blocos = _descartar_headers_orfaos(blocos)
-        blocos = [b for b in blocos if b["conteudo"].strip()]
+        blocos = _mover_header_longo_para_conteudo(blocos)
+        blocos = [b for b in blocos if b["conteudo"].strip() or b["header"].strip()]
 
         grandes_resolvidos: list[dict] = []
         for b in blocos:

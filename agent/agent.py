@@ -13,16 +13,25 @@ from agent.tools.search_edital import buscar_no_edital
 from agent.tools.resumo_perfil import resumo_edital
 from agent.tools.ler_capitulo import listar_capitulos, ler_capitulo
 from agent.tools.data_hoje import data_hoje
+from database.db import get_connection
 
 
 SYSTEM_PROMPT = """\
 Você é um assistente especializado em concursos públicos na área de Ciência de Dados.
 
-PROCEDIMENTO OBRIGATÓRIO (siga sempre nesta ordem):
+EDITAL ATIVO NESTA CONVERSA:
+{contexto_edital}
 
-1. SEMPRE comece chamando listar_editais() para saber quais editais existem e seus IDs.
-2. Use os IDs retornados para chamar as demais ferramentas. NUNCA invente IDs.
-3. Se o usuário mencionar um órgão por abreviação (BNDES, Petrobras, CVM), identifique o ID correspondente na listagem.
+REGRAS DE ESCOPO — OBRIGATÓRIAS:
+- O usuário já escolheu o edital desta conversa na interface. Você NÃO deve perguntar
+  "qual edital?", NÃO deve pedir para o usuário identificar o órgão, e NÃO deve chamar
+  listar_editais exceto quando o edital ativo for "Todos os editais".
+- Quando o edital ativo tem um ID específico, SEMPRE use esse ID nas chamadas às tools
+  que recebem edital_id. Ignore qualquer ID que tenha aparecido em turnos anteriores
+  desta ou de outra conversa.
+- Se o usuário mencionar outro órgão (ex: está na conversa da CVM mas pergunta sobre
+  o BNDES), avise-o que a conversa atual é da CVM e que ele precisa trocar o edital
+  ativo no menu lateral para consultar outro.
 
 COMPARAÇÃO DE DATAS — REGRA OBRIGATÓRIA:
 - Para QUALQUER pergunta que envolva vigência, prazos, se está aberto/fechado,
@@ -51,10 +60,7 @@ FALLBACK OBRIGATÓRIO — NUNCA RESPONDA "NÃO ENCONTREI" SEM ANTES:
   (ex: vagas/cotas geralmente estão em caps iniciais; conteúdo programático em anexos).
 - Se TUDO falhou, só então responda que não encontrou — e seja explícito sobre o que tentou.
 
-Exemplos:
-- "Quantas vagas PcD pra Ciência de Dados?" → consultar_edital(id, 'vagas'). Se não
-  trouxer PcD discriminado, use buscar_no_edital('vagas PcD Ciência de Dados', id).
-- "Inscrições abertas?" → data_hoje() + consultar_edital(id, 'cronograma'). Compare.
+NUNCA INVENTE informação. Se o edital não cobre a pergunta, diga isso claramente.
 
 REGRAS GERAIS:
 - Foque em Ciência de Dados, a menos que o usuário peça outra coisa.
@@ -76,14 +82,43 @@ ALL_TOOLS = [
 TOOLS_BY_NAME = {tool.name: tool for tool in ALL_TOOLS}
 
 
+def _montar_contexto_edital(edital_id_ativo: int) -> str:
+    """Monta o texto descritivo do edital ativo para injetar no SYSTEM_PROMPT."""
+    if edital_id_ativo == 0:
+        return (
+            "Modo 'TODOS OS EDITAIS' — o usuário não fixou um edital específico. "
+            "Neste modo você PODE e DEVE chamar listar_editais primeiro, e depois "
+            "perguntar ao usuário sobre qual edital ele quer falar, OU buscar em "
+            "todos usando edital_id=0 nas tools que aceitam esse parâmetro."
+        )
+
+    conn = get_connection()
+    row = conn.execute(
+        "SELECT orgao, numero_edital, cargo FROM editais WHERE id = ?",
+        (edital_id_ativo,),
+    ).fetchone()
+    conn.close()
+
+    if not row:
+        return f"ID={edital_id_ativo} não encontrado no banco."
+
+    return (
+        f"ID={edital_id_ativo} | {row['orgao']} — {row['numero_edital']} — {row['cargo']}\n"
+        f"USE SEMPRE edital_id={edital_id_ativo} nas chamadas às tools desta conversa."
+    )
+
+
 class Agent:
     def __init__(self, provider=None, model=None):
         llm = get_llm(provider=provider, model=model)
         self.llm = llm.bind_tools(ALL_TOOLS)
         self.max_iterations = 10
 
-    def ask(self, question, chat_history=None):
-        messages = [SystemMessage(content=SYSTEM_PROMPT)]
+    def ask(self, question, chat_history=None, edital_id_ativo=0):
+        contexto = _montar_contexto_edital(edital_id_ativo)
+        system_msg = SYSTEM_PROMPT.format(contexto_edital=contexto)
+
+        messages = [SystemMessage(content=system_msg)]
         if chat_history:
             messages.extend(chat_history)
         messages.append(HumanMessage(content=question))
@@ -122,5 +157,9 @@ def build_agent(provider=None, model=None):
     return Agent(provider=provider, model=model)
 
 
-def ask(agent, question, chat_history=None):
-    return agent.ask(question=question, chat_history=chat_history)
+def ask(agent, question, chat_history=None, edital_id_ativo=0):
+    return agent.ask(
+        question=question,
+        chat_history=chat_history,
+        edital_id_ativo=edital_id_ativo,
+    )

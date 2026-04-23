@@ -1,4 +1,4 @@
-# ANEXO IV - MODELO DE RELATÓRIO/LAUDO CARACTERIZADOR DE DEFICIÊNCIA
+# ANEXO IV - MODELO DE RELATÓRIO /LAUDO CARACTERIZADOR DE DEFICIÊNCIA
 
 MODELO DE RELATÓRIO/ LAUDO CARACTERIZADOR DE DEFICIÊNCIA PARA A INSCRIÇÃO (candidatos(as) que se declararam com deficiência).
 
@@ -9,7 +9,7 @@ ________________________________________________________________________________
 
 Cidade/UF, ____ de _________ de____.
 
-Assinatura e carimbo do(a) médico(a) ou profissional de saúde de nível superior (fisioterapeuta, fonoaudiólogo(a), terapeuta ocupacional e psicólogo(a))
+Assinatura e carimbo do(a) médico(a) ou profissional de saúde de nível superior (fisioterapeuta, fonoaudiólogo(a), terapeuta ocupacional e psicólogo(a)
 
 ## ATENÇÃO aos documentos e(ou) informações que devem ser adicionados para cada caso.
 

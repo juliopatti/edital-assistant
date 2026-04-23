@@ -1,7 +1,5 @@
 # ANEXO III - CRONOGRAMA
 
-## EVENTOS BÁSICOS - BNDES
-
 | EVENTOS BÁSICOS - BNDES | DATAS |
 |---|---|
 | Publicação do Edital | 22/07/2024 |

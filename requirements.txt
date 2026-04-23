@@ -3,6 +3,7 @@ langchain==1.2.15
 langchain-community==0.4.1
 langchain-openai==1.1.12
 langchain-google-genai==4.2.1
+langchain-anthropic==1.4.1
 
 # Interface
 streamlit==1.56.0

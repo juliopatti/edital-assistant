@@ -26,8 +26,7 @@ b) No turno da tarde: Prova Objetiva de conhecimentos específicos;
 
 ### 9.6.4. O quadro a seguir apresenta as disciplinas:
 
-### ANALISTA – Ciência de Dados (Perfil 7)
-
+### INSPETOR e ANALISTA - Todas as especialidades
 #### MÓDULO I – CONHECIMENTOS BÁSICOS - MANHÃ
 
 | Disciplina | Questões |
@@ -39,6 +38,7 @@ b) No turno da tarde: Prova Objetiva de conhecimentos específicos;
 | Raciocínio-Lógico | 05 |
 | Total | 40 |
 
+### ANALISTA – Ciência de Dados (Perfil 7)
 #### MÓDULO II – CONHECIMENTOS ESPECÍFICOS - TARDE
 
 | Disciplina | Questões |

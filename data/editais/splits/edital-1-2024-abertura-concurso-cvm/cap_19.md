@@ -18,14 +18,14 @@ ____________________________
 
 ## DEMAIS MEMBROS DO NÚCLEO FAMILIAR: 
 
-| | NOME | CPF (se possuir) | GRAU DE PARENTESCO | IDADE | RENDA* |
-|---|---|---|---|---|---|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
-| 6 | | | | | |
+| NOME | CPF (se possuir) | GRAU DE PARENTESCO | IDADE | RENDA* |
+|------|------------------|-------------------|-------|--------|
+| 1    |                  |                   |       |        |
+| 2    |                  |                   |       |        |
+| 3    |                  |                   |       |        |
+| 4    |                  |                   |       |        |
+| 5    |                  |                   |       |        |
+| 6    |                  |                   |       |        |
 
 *Informação dispensável somente para os familiares menores de 18 (dezoito) anos. 
 

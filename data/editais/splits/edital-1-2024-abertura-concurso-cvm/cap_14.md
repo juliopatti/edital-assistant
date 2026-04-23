@@ -8,14 +8,6 @@
 
 ## 14.4. Os candidatos aprovados serão convocados obedecendo à ordem classificatória, observado o preenchimento das vagas existentes.
 
-## 14.5. Para os cargos de Inspetor e de Analista, caso não haja candidatos aprovados em número suficiente para suprir todas as vagas de determinada especialidade, essas vagas poderão ser revertidas para outras especialidades, conforme indicado na coluna "Especialidade para Substituição" das Tabelas X1 e X2 do Anexo VI deste Edital.
-
-### 14.5.1. A intercambialidade de vagas ocorrerá somente se esgotada a lista de candidatos aprovados e classificados em uma das especialidades de que tratam as Tabela X1 e X2 do Anexo VI deste Edital.
-
-### 14.5.2. A intercambialidade de vagas obedecerá rigorosamente à classificação dos candidatos dentro de sua especialidade e à ordem de intercambialidade apresentada nas Tabelas X1 e X2 do Anexo VI deste Edital, coluna "Especialidade para Substituição".
-
-### 14.5.3. Mesmo quando ocorrer a intercambialidade, os requisitos de curso superior específico e registro em conselho de classe, quando for o caso, serão observados conforme a lista de aprovados da qual o candidato faz parte conforme sua opção na inscrição, independentemente de a vaga disponível estar originalmente prevista na tabela de vagas ou ser proveniente de substituição pela tabela de intercambialidade do cargo.
-
 ## 14.6. O candidato, além de atender aos requisitos exigidos no subitens 3.1, 3.2 e 3.3 deste Edital, deverá apresentar, necessariamente, no ato da posse, os documentos e certidões exigidos pela CVM. A CVM poderá solicitar outros documentos complementares.
 
 ## 14.7. Será aceito pedido de reclassificação (final de lista) na hipótese de o candidato manifestar desinteresse na vaga quando convocado, observado o disposto no art. 22 da Instrução Normativa ME nº 2/2019.
