@@ -34,21 +34,54 @@ st.caption(f"Modelo: **{settings.llm_provider}/{settings.llm_model}** · Ciênci
 with st.sidebar:
     st.header("⚙️ Configuração")
 
+    provider_options = ["openai", "google", "anthropic", "groq"]
+    default_provider = settings.llm_provider.lower()
+    provider_index = (
+        provider_options.index(default_provider)
+        if default_provider in provider_options
+        else 0
+    )
     provider = st.selectbox(
         "Provider",
-        options=["openai", "google"],
-        index=0 if settings.llm_provider == "openai" else 1,
+        options=provider_options,
+        index=provider_index,
     )
 
     model_options = {
-        "openai": ["gpt-4o-mini", "gpt-4o", "gpt-4-turbo"],
-        "google": ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"],
+        "openai": [
+            "gpt-4o-mini",
+            "gpt-5.4-mini",
+            "gpt-5.4",
+            "gpt-5.5",
+        ],
+        "google": [
+            "gemini-2.5-flash-lite",
+            "gemini-3-flash-preview",
+            "gemini-3.1-pro-preview",
+        ],
+        "anthropic": [
+            "claude-haiku-4-5",
+            "claude-sonnet-4-6",
+            "claude-opus-4-7",
+        ],
+        "groq": [
+            "llama-3.1-8b-instant",
+            "meta-llama/llama-4-scout-17b-16e-instruct",
+            "llama-3.3-70b-versatile",
+        ],
     }
 
     model = st.selectbox(
         "Modelo",
         options=model_options.get(provider, []),
     )
+
+    # Se provider ou modelo mudou, força recriar o agente.
+    # Não limpa o histórico — pra testar o mesmo turno em modelos diferentes.
+    chave_modelo_atual = (provider, model)
+    if st.session_state.get("modelo_anterior") != chave_modelo_atual:
+        st.session_state.pop("agent", None)
+        st.session_state.modelo_anterior = chave_modelo_atual
 
     st.divider()
     st.markdown("**Edital ativo**")
@@ -79,6 +112,18 @@ with st.sidebar:
         st.session_state.messages = []
         st.session_state.pop("agent", None)
         st.rerun()
+
+    memoria_ativa = st.toggle(
+        "🧠 Memória do chat",
+        value=True,
+        help=(
+            "Ligado: o agente lê o histórico desta conversa antes de responder. "
+            "Desligado: cada pergunta é tratada de forma independente, sem "
+            "contexto das anteriores. (As mensagens continuam visíveis na tela.)"
+        ),
+    )
+    if not memoria_ativa:
+        st.caption("⚠️ Cada pergunta será respondida sem contexto das anteriores.")
 
     st.divider()
     st.markdown("**Status do sistema**")
@@ -117,11 +162,14 @@ if prompt := st.chat_input("Pergunte sobre editais de concursos..."):
     with st.chat_message("assistant"):
         with st.spinner("Pensando..."):
             agent = get_agent()
+            historico_pra_agente = (
+                st.session_state.messages[:-1] if memoria_ativa else []
+            )
             try:
                 response = ask(
                     agent=agent,
                     question=prompt,
-                    chat_history=st.session_state.messages[:-1],
+                    chat_history=historico_pra_agente,
                     edital_id_ativo=edital_id_ativo,
                 )
             except Exception as e:

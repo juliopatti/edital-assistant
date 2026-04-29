@@ -5,13 +5,15 @@ from pathlib import Path
 
 class Settings(BaseSettings):
     # LLM
-    llm_provider: str = Field(default="openai", description="'openai' ou 'google'")
+    llm_provider: str = Field(default="openai", description="'openai', 'google', 'anthropic' ou 'groq'")
     llm_model: str = Field(default="gpt-4o-mini")
     llm_temperature: float = Field(default=0.2)
 
     # API Keys
     openai_api_key: str = Field(default="")
     google_api_key: str = Field(default="")
+    anthropic_api_key: str = Field(default="")
+    groq_api_key: str = Field(default="")
 
     # Paths
     base_dir: Path = Field(default=Path(__file__).parent)

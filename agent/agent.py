@@ -1,5 +1,8 @@
 """Agente principal com SOP, tools baseadas em ID e self-check determinístico."""
 
+import re
+from pathlib import Path
+
 from langchain_core.messages import (
     HumanMessage,
     SystemMessage,
@@ -12,7 +15,7 @@ from agent.tools.search_edital import buscar_no_edital
 from agent.tools.ler_capitulo import listar_capitulos, ler_capitulo
 from agent.tools.data_hoje import data_hoje
 from database.db import get_connection
-import re
+from config import settings
 
 
 SYSTEM_PROMPT = """\
@@ -135,6 +138,12 @@ ALL_TOOLS = [
 TOOLS_BY_NAME = {tool.name: tool for tool in ALL_TOOLS}
 
 
+# Casa entradas de TOC nível 1: "# Título (p. X–Y)" — mesmo padrão do pdf_splitter.
+_TOC_LEVEL1_RE = re.compile(
+    r'^#\s+(?P<title>.+?)\s+\(p\.\s*\d+\s*[–\-]\s*\d+\)\s*$'
+)
+
+
 def _montar_contexto_edital(edital_id_ativo: int) -> str:
     if edital_id_ativo == 0:
         return (
@@ -160,6 +169,83 @@ def _montar_contexto_edital(edital_id_ativo: int) -> str:
     )
 
 
+def _mapa_anexos(edital_id: int) -> dict[int, str]:
+    """
+    Retorna {cap_num: rotulo_curto} apenas dos capítulos do edital que são
+    ANEXO ou APÊNDICE. Ex (BNDES): {13: 'Anexo I', 14: 'Anexo II',
+    15: 'Anexo III', 16: 'Anexo IV'}.
+
+    Capítulos do corpo (não-anexo) NÃO entram aqui de propósito: '5' como
+    referência significa legitimamente 'item 5 do edital' e não deve ser
+    reescrito.
+
+    No modo 'Todos os editais' (edital_id<=0) retorna mapa vazio.
+    """
+    if edital_id <= 0:
+        return {}
+
+    conn = get_connection()
+    row = conn.execute(
+        "SELECT arquivo_origem FROM editais WHERE id = ?", (edital_id,)
+    ).fetchone()
+    conn.close()
+    if not row or not row["arquivo_origem"]:
+        return {}
+
+    stem = Path(row["arquivo_origem"]).stem
+    toc_path = settings.editais_dir / f"{stem}_toc.txt"
+    if not toc_path.exists():
+        return {}
+
+    mapa: dict[int, str] = {}
+    cap_num = 0  # cap_0 = preâmbulo; nível 1 do TOC começa em cap_1
+    for linha in toc_path.read_text(encoding="utf-8").splitlines():
+        m = _TOC_LEVEL1_RE.match(linha)
+        if not m:
+            continue
+        cap_num += 1
+        titulo = m.group("title").strip()
+        if not titulo.upper().startswith(("ANEXO", "APÊNDICE", "APENDICE")):
+            continue
+        # Mantém só o rótulo curto antes do primeiro travessão/hífen separador.
+        rotulo = re.split(r"\s+[—–-]\s+", titulo, maxsplit=1)[0].strip()
+        # 'ANEXO I' → 'Anexo I'
+        partes = rotulo.split()
+        if partes:
+            partes[0] = partes[0].capitalize()
+            rotulo = " ".join(partes)
+        mapa[cap_num] = rotulo
+    return mapa
+
+
+def _corrigir_refs_anexos(texto: str, mapa_anexos: dict[int, str]) -> str:
+    """
+    Encontra ocorrências de 'ref: edital [...]' e substitui itens que sejam
+    inteiros puros e correspondam a um cap_num de anexo pelo rótulo do anexo.
+    Itens com ponto (5.1, 9.6.6) ou já textuais (Anexo I) ficam intocados.
+    """
+    if not mapa_anexos:
+        return texto
+
+    def _substituir(match: re.Match) -> str:
+        conteudo = match.group(1)
+        itens = [it.strip() for it in conteudo.split(",")]
+        novos: list[str] = []
+        for it in itens:
+            if it.isdigit() and int(it) in mapa_anexos:
+                novos.append(mapa_anexos[int(it)])
+            else:
+                novos.append(it)
+        return f"ref: edital [{', '.join(novos)}]"
+
+    return re.sub(
+        r"ref:\s*edital\s*\[([^\]]+)\]",
+        _substituir,
+        texto,
+        flags=re.IGNORECASE,
+    )
+
+
 class Agent:
     def __init__(self, provider=None, model=None):
         self._provider = provider
@@ -178,6 +264,7 @@ class Agent:
     def ask(self, question, chat_history=None, edital_id_ativo=0):
         contexto = _montar_contexto_edital(edital_id_ativo)
         system_msg = SYSTEM_PROMPT.format(contexto_edital=contexto)
+        mapa_anexos = _mapa_anexos(edital_id_ativo)
 
         messages = [SystemMessage(content=system_msg)]
         if chat_history:
@@ -230,13 +317,16 @@ class Agent:
                         "ferramenta apropriada agora antes de responder."
                     )))
                     continue
-            # Normaliza "[ref: edital [7.2]]" → "ref: edital [7.2]"
+
+            # Pós-processamento da resposta final.
             conteudo = response.content if isinstance(response.content, str) else str(response.content)
+            # Normaliza "[ref: edital [7.2]]" → "ref: edital [7.2]"
             conteudo = re.sub(r"\[\s*(ref:\s*edital\s*\[[^\]]+\])\s*\]", r"\1", conteudo, flags=re.IGNORECASE)
             conteudo = re.sub(r"[ \t]+(ref:\s*edital\s*\[[^\]]+\])([.!?])?", r"\2\n\n\1", conteudo, flags=re.IGNORECASE)
             conteudo = re.sub(r"\n{3,}(ref:\s*edital\s*\[[^\]]+\])", r"\n\n\1", conteudo, flags=re.IGNORECASE)
+            # Corrige refs numéricas que apontam para anexos (ex.: [13] → [Anexo I])
+            conteudo = _corrigir_refs_anexos(conteudo, mapa_anexos)
             return conteudo
-            # return response.content
 
         return "Não consegui completar a consulta após várias tentativas. Tente reformular a pergunta."
 
