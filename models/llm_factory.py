@@ -48,6 +48,16 @@ def get_llm(
             temperature=_temperature,
             api_key=settings.anthropic_api_key,
         )
+    elif _provider == "deepseek":
+        from langchain_openai import ChatOpenAI
+
+        return ChatOpenAI(
+            model=_model,
+            temperature=_temperature,
+            api_key=settings.deepseek_api_key,
+            base_url="https://api.deepseek.com",
+            model_kwargs={"extra_body": {"thinking": {"type": "disabled"}}},
+        )
 
     elif _provider == "groq":
         from langchain_groq import ChatGroq
@@ -61,7 +71,7 @@ def get_llm(
     else:
         raise ValueError(
             f"Provider '{_provider}' não suportado. "
-            "Use 'openai', 'google', 'anthropic' ou 'groq'."
+            "Use 'openai', 'google', 'anthropic', 'groq' ou 'deepseek'."
         )
 
 
@@ -88,5 +98,9 @@ def list_available_models() -> dict[str, list[str]]:
             "llama-3.1-8b-instant",
             "meta-llama/llama-4-scout-17b-16e-instruct",
             "llama-3.3-70b-versatile",
+        ],
+        "deepseek": [
+            "deepseek-v4-flash",   
+            "deepseek-v4-pro",     
         ],
     }

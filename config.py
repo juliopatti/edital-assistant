@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     google_api_key: str = Field(default="")
     anthropic_api_key: str = Field(default="")
     groq_api_key: str = Field(default="")
+    deepseek_api_key: str = Field(default="")
 
     # Paths
     base_dir: Path = Field(default=Path(__file__).parent)

@@ -34,7 +34,7 @@ st.caption(f"Modelo: **{settings.llm_provider}/{settings.llm_model}** · Ciênci
 with st.sidebar:
     st.header("⚙️ Configuração")
 
-    provider_options = ["openai", "google", "anthropic", "groq"]
+    provider_options = ["openai", "google", "anthropic", "groq", "deepseek"]
     default_provider = settings.llm_provider.lower()
     provider_index = (
         provider_options.index(default_provider)
@@ -53,6 +53,10 @@ with st.sidebar:
             "gpt-5.4-mini",
             "gpt-5.4",
             "gpt-5.5",
+        ],
+        "deepseek": [
+            "deepseek-v4-flash",   
+            "deepseek-v4-pro",     
         ],
         "google": [
             "gemini-2.5-flash-lite",
