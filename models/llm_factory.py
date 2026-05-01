@@ -43,11 +43,16 @@ def get_llm(
     elif _provider == "anthropic":
         from langchain_anthropic import ChatAnthropic
 
-        return ChatAnthropic(
-            model=_model,
-            temperature=_temperature,
-            api_key=settings.anthropic_api_key,
-        )
+        kwargs = {
+            "model": _model,
+            "api_key": settings.anthropic_api_key,
+        }
+        # Opus 4.7+ deprecou temperature
+        if "opus-4-7" not in _model:
+            kwargs["temperature"] = _temperature
+
+        return ChatAnthropic(**kwargs)
+    
     elif _provider == "deepseek":
         from langchain_openai import ChatOpenAI
 

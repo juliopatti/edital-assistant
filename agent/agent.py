@@ -266,7 +266,15 @@ class Agent:
         system_msg = SYSTEM_PROMPT.format(contexto_edital=contexto)
         mapa_anexos = _mapa_anexos(edital_id_ativo)
 
-        messages = [SystemMessage(content=system_msg)]
+        if self._provider == "anthropic":
+            sys_content = [{
+                "type": "text",
+                "text": system_msg,
+                "cache_control": {"type": "ephemeral"},
+            }]
+        else:
+            sys_content = system_msg
+        messages = [SystemMessage(content=sys_content)]
         if chat_history:
             messages.extend(chat_history)
         messages.append(HumanMessage(content=question))
