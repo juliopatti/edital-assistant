@@ -22,3 +22,7 @@ pypdf==6.10.2
 
 # notebooks
 openpyxl==3.1.5
+
+# visualização
+matplotlib==3.10.9
+seaborn==0.13.2
