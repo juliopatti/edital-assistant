@@ -28,5 +28,12 @@ petrobras__anthropic__claude-opus-4-7__20260430_170005.xlsx -> https://chatgpt.c
 
 
 
+bndes_std_claude_qa -> https://claude.ai/share/df599f66-5732-4586-9b14-a0d096104979 -> avaliacao claude -> 
+petro_std_claude_qa -> https://claude.ai/share/648ff92b-1d75-446c-a1f6-4caa43ad84cd -> avaliacao claude -> 
+cvm_std_claude_qa -> https://claude.ai/share/9de23004-7fdf-4037-ad9e-8f1cdf3738de -> avaliacao claude -> 
+petro_std_chatgpt_qa-> https://chatgpt.com/share/69ffe008-cabc-83ea-bc15-eb1b67807cf3 -> avaliacao claude -> 
+cvm_std_chatgpt_qa -> https://chatgpt.com/share/6a00987d-bb98-83e9-afdf-957088bda794 -> avaliacao claude -> 
+bndes_std_chatgpt_qa -> https://chatgpt.com/share/6a00e8ff-9598-83e9-9b2e-7df11d7960c5 -> avaliacao claude -> 
+
 
 

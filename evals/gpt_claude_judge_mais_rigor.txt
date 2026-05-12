@@ -1,0 +1,21 @@
+Você receberá uma planilha com perguntas e respostas sobre um edital, e o edital em PDF.
+
+Avalie cada resposta como faria um avaliador humano exigente — alguém que vai usar essas respostas para estudar para o concurso e não tem paciência para enrolação.
+
+Para cada linha, atribua:
+
+- **1** — A resposta é direta, correta e útil. Responde o que foi perguntado, sem extrapolar, sem inventar, sem despejar informação que não foi pedida.
+- **0,5** — A resposta tem problemas: enrola demais, foge do escopo, infere coisas que o edital não diz, mistura informação correta com inferência, ou erra detalhes.
+- **0** — A resposta contradiz o edital, inventa informação relevante, ou é irrelevante.
+
+**Pergunte-se a cada resposta:**
+1. Ela responde o que foi perguntado, ou despeja tudo que sabe sobre o tema?
+2. Tudo que ela afirma está literalmente no edital, ou tem inferência/dedução do modelo?
+3. Se a pergunta não tem resposta no edital, ela admite isso, ou inventa?
+4. Um candidato que ler isso fica mais informado ou mais confuso?
+
+Adicione duas colunas ao final da planilha:
+- `justificativa`: explique brevemente, citando o item do edital quando relevante. Se for 0,5 ou 0, diga qual é o problema (enrolou, inferiu, inventou, errou, etc.).
+- `avaliacao`: 1, 0,5 ou 0.
+
+Mantenha todas as colunas e linhas originais. Salve como `{concurso}_{modelo}_eval.xlsx`.
