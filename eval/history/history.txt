@@ -1,0 +1,39 @@
+bndes__openai__gpt-4o-mini__20260429_231806.xlsx   -> https://chatgpt.com/share/69f2c5ef-a3d8-83e9-98e0-110960d07893 -> https://claude.ai/share/e9c82702-e9d0-4b14-a09b-17a119057d30
+cvm__openai__gpt-4o-mini__20260429_232228.xlsx  -> https://chatgpt.com/share/69f2cbd9-3e34-83e9-a333-afa7eea6d131 -> https://claude.ai/share/2b5ce96d-bcc2-4a84-87c9-2a21bfb1da57
+petrobras__openai__gpt-4o-mini__20260429_232739.xlsx -> https://chatgpt.com/share/69f2ce86-c0b4-83e9-ac52-1fbd2f322224 -> https://claude.ai/share/a9c1836e-6532-4e3f-b73f-2121329e9d2d
+bndes__deepseek__deepseek-v4-flash__20260429_233504.xlsx -> https://chatgpt.com/share/69f2d102-f864-83e9-ad0b-b29c04d61a88 -> https://claude.ai/share/2274d4d3-9f87-4f4f-85b6-0a82c478060f
+cvm__deepseek__deepseek-v4-flash__20260429_234135.xlsx -> https://chatgpt.com/share/69f2d4dd-8ff8-83e9-9d70-b82c6a5dbca2 -> https://claude.ai/share/a0ab8952-ef4c-42a9-8d85-090b68d2f8ba
+petrobras__deepseek__deepseek-v4-flash__20260429_234903.xlsx -> https://chatgpt.com/share/69f2d78c-93f8-83e9-b886-2f84172a4bd0 -> https://claude.ai/share/e65519f5-c010-4f27-8bbc-6a374a7e777d
+bndes__openai__gpt-5.4-mini__20260429_235130.xlsx -> https://chatgpt.com/share/69f2d929-2094-83e9-be6e-212d54247181 -> https://claude.ai/share/d6c2a917-fb48-43d6-9391-b50cf74e7b42
+cvm__openai__gpt-5.4-mini__20260429_235347.xlsx -> https://chatgpt.com/share/69f2daee-f31c-83e9-8994-9a3269f83c3e -> https://claude.ai/share/5a5317c8-9654-4e39-8a85-47ffb25ceab0
+petrobras__openai__gpt-5.4-mini__20260429_235625.xlsx -> https://chatgpt.com/share/69f2e02e-0070-83e9-bed6-8a1f9e3e401c -> https://claude.ai/share/adefb1f4-447c-463e-aaeb-b7dfa6a9798a
+bndes__deepseek__deepseek-v4-pro__20260430_001110.xlsx -> https://chatgpt.com/share/69f2e421-e0d4-83e9-b948-e4c388126458 -> https://claude.ai/share/c73f6185-357c-4027-ab0c-532a19352835
+cvm__deepseek__deepseek-v4-pro__20260430_002507.xlsx -> https://chatgpt.com/share/69f2e7c4-72b0-83e9-884f-6b9f1a1310df -> https://claude.ai/share/6458d239-529f-4432-93cd-4da6507b7283
+petrobras__deepseek__deepseek-v4-pro__20260430_004108.xlsx -> https://chatgpt.com/share/69f2eab1-8998-83e9-ba0a-962376b91ff5 -> https://claude.ai/share/62c7dc18-876d-4205-9406-e981bfdd93b1
+bndes__anthropic__claude-haiku-4-5__20260430_005407.xlsx -> https://chatgpt.com/share/69f2ecfe-cbcc-83e9-b523-30bb2707502d -> https://claude.ai/share/957a2485-1290-409f-ab38-3a1ae00db735
+cvm__anthropic__claude-haiku-4-5__20260430_010717.xlsx -> https://chatgpt.com/share/69f2f122-ade8-83e9-b8cb-995b8b47450a -> https://claude.ai/share/84db3eca-d8fd-4e67-9155-934f463b95e5
+petrobras__anthropic__claude-haiku-4-5__20260430_012454.xlsx -> https://chatgpt.com/share/69f2f496-b814-83e9-95c6-35e476e23441 -> https://claude.ai/share/ba3af79f-d0d5-4f0a-a43a-849a551348d1
+bndes__openai__gpt-5.4__20260430_143844.xlsx -> https://chatgpt.com/share/69f3ce9d-dc84-83e9-819c-a1f38e2a06e2 -> https://claude.ai/share/338cd843-4d68-4493-8ec6-90e2fb170d5b
+cvm__openai__gpt-5.4__20260430_144346.xlsx -> hhttps://chatgpt.com/share/69f3d0d6-1228-83e9-ad63-d1d79ba088d4 -> https://claude.ai/share/cd9d2c51-9f5b-495e-b8d7-91f7fd75a77a
+petrobras__openai__gpt-5.4__20260430_144830.xlsx -> https://chatgpt.com/share/69f3d802-b218-83e9-8c67-36c204761a3b -> https://claude.ai/share/7931aaa3-ba61-4051-a5f7-590fd6ef4a95
+bndes__anthropic__claude-sonnet-4-6__20260430_145859.xlsx -> https://chatgpt.com/share/69f3dc6f-4068-83e9-b738-4755d8b46a51 -> https://claude.ai/share/c21acdd3-0c0c-49df-b7ed-71881c16edac
+cvm__anthropic__claude-sonnet-4-6__20260430_150934.xlsx -> https://chatgpt.com/share/69f3e401-8860-83e9-aa35-69e0bfe2f51e -> https://claude.ai/share/55582725-6588-45ca-b9e5-1f5236d7f8c7
+petrobras__anthropic__claude-sonnet-4-6__20260430_152048.xlsx -> https://chatgpt.com/share/69f3e819-f218-83e9-a856-956ae95c58fd -> https://claude.ai/share/850597d3-44db-4b74-88c0-9020ca0a8cf5
+bndes__anthropic__claude-opus-4-7__20260430_153052.xlsx -> https://chatgpt.com/share/69f41d03-32f0-83e9-995c-9103a97d170b -> https://claude.ai/share/5bb4c212-0cf4-423b-83e1-af37c50af5bb
+bndes__openai__gpt-5.5__20260430_154956.xlsx -> https://chatgpt.com/share/69f3fbbf-5428-83e9-8fdf-2912eb1b2736 -> https://claude.ai/share/f9471e4e-b01c-4a80-8fec-c4f429883992
+cvm__openai__gpt-5.5__20260430_160521.xlsx -> https://chatgpt.com/share/69f3fdd4-9e80-83e9-a7dd-2f85e94fdd80 -> https://claude.ai/share/c8bbca31-d5af-4e68-8f6d-015d95b50dd5
+petrobras__openai__gpt-5.5__20260430_162514.xlsx -> https://chatgpt.com/share/69f4093a-5ae8-83e9-9006-575ed2e3b368 -> https://claude.ai/share/577b1958-6cf9-4655-a71b-3160eb29594d
+cvm__anthropic__claude-opus-4-7__20260430_164938.xlsx -> https://chatgpt.com/share/69f410a6-5914-83e9-aa0a-45f1390739d5 -> https://claude.ai/share/afefab65-b0a5-451b-a551-5f690f3d2742
+petrobras__anthropic__claude-opus-4-7__20260430_170005.xlsx -> https://chatgpt.com/share/69f41248-6d4c-83e9-808c-b025836ef203 -> https://claude.ai/share/c48d15ef-56f9-4cd3-bc97-4fb3ed72fd0a
+
+
+
+bndes_std_claude_qa -> https://claude.ai/share/df599f66-5732-4586-9b14-a0d096104979 -> avaliacao claude -> 
+petro_std_claude_qa -> https://claude.ai/share/648ff92b-1d75-446c-a1f6-4caa43ad84cd -> avaliacao claude -> 
+cvm_std_claude_qa -> https://claude.ai/share/9de23004-7fdf-4037-ad9e-8f1cdf3738de -> avaliacao claude -> 
+petro_std_chatgpt_qa-> https://chatgpt.com/share/69ffe008-cabc-83ea-bc15-eb1b67807cf3 -> avaliacao claude -> 
+cvm_std_chatgpt_qa -> https://chatgpt.com/share/6a00987d-bb98-83e9-afdf-957088bda794 -> avaliacao claude -> 
+bndes_std_chatgpt_qa -> https://chatgpt.com/share/6a00e8ff-9598-83e9-9b2e-7df11d7960c5 -> avaliacao claude -> 
+
+
+
