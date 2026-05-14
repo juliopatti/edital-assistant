@@ -63,3 +63,9 @@ O modelo BGE-M3 (~2GB) será baixado automaticamente na primeira execução.
 - Busca vetorial: ChromaDB + BGE-M3 (BAAI)
 - Extração de PDF: pdfplumber
 - Modelos de dados: Pydantic v2
+
+## Autores
+
+- Julio Patti Pereira
+- Leonardo Fernandes de Castro
+- João Vítor Dallegrave
