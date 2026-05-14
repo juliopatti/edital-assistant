@@ -27,20 +27,16 @@ st.set_page_config(
 )
 
 st.title("📋 Assistente de Editais")
-st.caption(f"Modelo: **{settings.llm_provider}/{settings.llm_model}** · Ciência de Dados")
+st.caption("💡 Escolha seu provedor e modelo de preferência na **barra lateral** (⚙️ à esquerda).")
 
 
 # --- Sidebar: config ---
 with st.sidebar:
     st.header("⚙️ Configuração")
 
-    provider_options = ["openai", "google", "anthropic", "groq", "deepseek"]
-    default_provider = settings.llm_provider.lower()
-    provider_index = (
-        provider_options.index(default_provider)
-        if default_provider in provider_options
-        else 0
-    )
+    provider_options = ["openai", "anthropic", "deepseek"]
+    default_provider = "openai"
+    provider_index = provider_options.index(default_provider)
     provider = st.selectbox(
         "Provider",
         options=provider_options,
@@ -49,29 +45,19 @@ with st.sidebar:
 
     model_options = {
         "openai": [
-            "gpt-4o-mini",
-            "gpt-5.4-mini",
             "gpt-5.4",
+            "gpt-5.4-mini",
+            "gpt-4o-mini",
             "gpt-5.5",
         ],
         "deepseek": [
-            "deepseek-v4-flash",   
-            "deepseek-v4-pro",     
-        ],
-        "google": [
-            "gemini-2.5-flash-lite",
-            "gemini-3-flash-preview",
-            "gemini-3.1-pro-preview",
+            "deepseek-v4-flash",
+            "deepseek-v4-pro",
         ],
         "anthropic": [
             "claude-haiku-4-5",
             "claude-sonnet-4-6",
             "claude-opus-4-7",
-        ],
-        "groq": [
-            "llama-3.1-8b-instant",
-            "meta-llama/llama-4-scout-17b-16e-instruct",
-            "llama-3.3-70b-versatile",
         ],
     }
 
@@ -119,7 +105,7 @@ with st.sidebar:
 
     memoria_ativa = st.toggle(
         "🧠 Memória do chat",
-        value=True,
+        value=False,
         help=(
             "Ligado: o agente lê o histórico desta conversa antes de responder. "
             "Desligado: cada pergunta é tratada de forma independente, sem "
