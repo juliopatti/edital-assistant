@@ -18,7 +18,11 @@ Ferramenta que responde perguntas sobre editais de concursos públicos com foco 
 
     cp .env.example .env
 
-Editar .env com suas chaves de API (OpenAI e/ou Google).
+Editar `.env` com as chaves de API dos provedores que for usar:
+
+    OPENAI_API_KEY=sk-...
+    ANTHROPIC_API_KEY=sk-ant-...
+    DEEPSEEK_API_KEY=...
 
 4. Rodar:
 
@@ -56,12 +60,12 @@ O modelo BGE-M3 (~2GB) será baixado automaticamente na primeira execução.
 
 ## Stack
 
-- LLM: OpenAI (GPT-4o-mini) ou Google (Gemini Flash), intercambiáveis via .env
+- LLM (chat): OpenAI, Anthropic e DeepSeek — selecionáveis pela interface
+- Ingestão de PDF: pypdf (split em capítulos) + Anthropic multimodal (PDF → markdown filtrado para Ciência de Dados)
 - Orquestração: LangChain
 - Interface: Streamlit
 - Banco de dados: SQLite
 - Busca vetorial: ChromaDB + BGE-M3 (BAAI)
-- Extração de PDF: pdfplumber
 - Modelos de dados: Pydantic v2
 
 ## Autores
